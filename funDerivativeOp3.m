@@ -1,12 +1,28 @@
 function A = funDerivativeOp3(M,N,L,h)
-% Generate first order gradient operator A in 3D case: {F} = {A}{U}
+%FUNDERIVATIVEOP3: 
+% Generate first order gradient operator A in 3D case: {F_vector} = {A}{U_vector}
+% 
+% U_vector = [u1_pt1, u2_pt1, u3_pt1,  u1_pt2, u2_pt2, u3_pt2,  ... ]';
+% F_vector = [F11_pt1,F21_pt1,F31_pt1,F12_pt1,F22_pt1,F32_pt1,F13_pt1,F23_pt1,F33_pt1, ...
+%                   F11_pt2,F21_pt2,F31_pt2,F12_pt2,F22_pt2,F32_pt2,F13_pt2,F23_pt2,F33_pt2, ...
+%                   ... Other points ... ]';
+% INPUT: M, N, L: size of 3D griddata
+%        h = [hx,hy,hz] is the unit step for 3D griddata
+%
+% OUTPUT: First order central difference operator
+% 
+% -----------------------------------------------
+% Author: Jin Yang (jyang526@wisc.edu)
+% Date: 06-24-2020
+%
+% Reference
+% [1] https://www.mathworks.com/matlabcentral/fileexchange/77019-augmented-lagrangian-digital-volume-correlation-aldvc
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% A = coder.ceval('funDerivativeOp3',M,N,L,h);
 
-DIM = 3;
-A = sparse(DIM^2*M*N*L, DIM*M*N*L); sizeA = size(A); 
+DIM = 3; A = sparse(DIM^2*M*N*L, DIM*M*N*L); sizeA = size(A); 
   
-% ------ Inside assign values ------
+%% ------ Inside assign values ------
 [XX,YY,ZZ] = ndgrid(1:M,1:N,1:L); XX = XX(:); YY = YY(:); ZZ = ZZ(:);
 INDEXI = zeros(2*DIM^2*M*N*L,1); INDEXJ = INDEXI; INDEXVAL = INDEXI;
 for tempi = 1:M*N*L

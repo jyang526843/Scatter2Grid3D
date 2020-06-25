@@ -3,12 +3,18 @@ function [xGrid,yGrid,zGrid,fGrid] = funScatter2Grid3D(varargin)
 %   [xGrid,yGrid,zGrid,fGrid] = funScatter2Grid3D(x,y,z,f,sxyz,smoothness)
 %   
 %   INPUT: 3D scatterred data with coordinates x,y,z and value f
-%          alpha is the coefficient for regularization
-%   OUTPUT: 3D gridded data 
+%          sxyz = [sx,sy,sz] is the step for griddata
+%          smoothness is the coefficient for regularization (function regularizeNd[1])
 %
+%   OUTPUT: 3D gridded data (fGrid) 
+%           Gridded coordinates (xGrid,yGrid,zGrid)
 %
+% -----------------------------------------------
 % Author: Jin Yang (jyang526@wisc.edu)
 % Date: 06-24-2020
+%
+% Reference
+% [1] https://www.mathworks.com/matlabcentral/fileexchange/61436-regularizend
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [x y z f sxyz smoothness] = parseargs(varargin);
