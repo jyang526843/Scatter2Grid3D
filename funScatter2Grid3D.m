@@ -1,5 +1,5 @@
 function [xGrid,yGrid,zGrid,fGrid] = funScatter2Grid3D(varargin)
-%FUNSCATTER2GRID3D: Interpolate 3D scatterred data to gridded data.
+%FUNSCATTER2GRID3D: Interpolate 3D scattered data to gridded data.
 %   [xGrid,yGrid,zGrid,fGrid] = funScatter2Grid3D(x,y,z,f,sxyz,smoothness)
 %   
 %   INPUT: 3D scatterred data with coordinates x,y,z and value f

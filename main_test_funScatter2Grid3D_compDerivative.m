@@ -10,10 +10,10 @@
 
 clear all; close all; clc;
 
-%% Interpolate scatterred data to regular griddata
+%% Interpolate scattered data to regular griddata
 load('testData.mat');
-% p_meas: coordinates of scatterred data
-% u_sim_pw_meas: measured displacements of scatterred data
+% p_meas: coordinates of scattered data
+% u_sim_pw_meas: measured displacements of scattered data
 
 % ------ u_meas ------
 sxyz = [10,10,10]; % Step for griddata
