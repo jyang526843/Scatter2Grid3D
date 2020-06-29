@@ -34,16 +34,10 @@ figure, quiver3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid)
 plotCone3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid); view([-60,30])
 
 % ----- Streamline plot ----
-[xGridsl,yGridsl,zGridsl] = meshgrid(xGrid(1):76:xGrid(end), yGrid(1):76:yGrid(end), [zGrid(1),zGrid(end)]);
+[xGridsl,yGridsl,zGridsl] = meshgrid(xGrid(1):76:xGrid(end), yGrid(1):76:yGrid(end), [zGrid(1),0,zGrid(end)]);
+plotStreamline3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid,xGridsl,yGridsl,zGridsl)
 
-figure,streamcolor(xGrid,yGrid,zGrid, u3x_meas_Grid, ...
-    u3y_meas_Grid,u3z_meas_Grid,xGridsl,yGridsl,zGridsl,u3_mag_meas_Grid);
-
-cb=colorbar; view([60,30]); set(gca,'fontsize',14); set(cb,'fontsize',14);
-ylabel('y (um)'); xlabel('x (um)'); zlabel('z (um)'); 
-grid minor; grid on; set(gcf,'color','w'); 
-
-
+ 
 
 %% Compute gradients
 % ----- F_meas ------

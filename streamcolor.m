@@ -63,30 +63,42 @@ if isempty(verts)
 end
 
 h = [];
-for k = 1:length(verts);
-  vv = verts{k};
-  if ~isempty(vv)
-    if size(vv,2)==3
-      %h = [h ; line(vv(:,1), vv(:,2), vv(:,3))];
-        X=vv(:,1); Y=vv(:,2); Z=vv(:,3);
-        Vcol=uint8(floor(interp3(x,y,z,Vmag,X,Y,Z)/Vmax*64));
-        Vcol(Vcol==0)=1;
-    for j=2:length(X)
-        line([X(j-1) X(j)],[Y(j-1) Y(j)],[Z(j-1) Z(j)],'color',[cmap(Vcol(j),1) cmap(Vcol(j),2) cmap(Vcol(j),3) ],'linewidth',lw)
-    end
-      
-      
-    else
-      %h = [h ; line(vv(:,1), vv(:,2))];
-        X=vv(:,1); Y=vv(:,2);
-        Vcol=uint8(floor(interp2(x,y,Vmag,X,Y)/Vmax*64));
-        Vcol(Vcol==0)=1;
-    for j=2:length(X)
-        line([X(j-1) X(j)],[Y(j-1) Y(j)],'color',[cmap(Vcol(j),1) cmap(Vcol(j),2) cmap(Vcol(j),3) ],'linewidth',lw)
-    end
-    
-    end
-  end
+for k = 1:length(verts)
+vv = verts{k};
+if ~isempty(vv)
+if size(vv,2)==3
+X=vv(:,1); Y=vv(:,2); Z=vv(:,3);
+Vcol=uint8(floor(interp3(x,y,z,Vmag,X,Y,Z)/Vmax*size(cmap,1)));
+Vcol(Vcol==0)=1;
+for j=1:size(cmap,1)
+pos = find(Vcol==j);
+if(~isempty(pos) && pos(1)==1), pos(1)=[]; end
+if ~isempty(pos)
+tempx = [X(pos-1) X(pos) NaN(size(pos))]';
+tempy = [Y(pos-1) Y(pos) NaN(size(pos))]';
+tempz = [Z(pos-1) Z(pos) NaN(size(pos))]';
+h = [h ; line(tempx(1:end-1),tempy(1:end-1),tempz(1:end-1),'color',cmap(j,:),'linewidth',lw)];
+end
+end
+else
+X=vv(:,1); Y=vv(:,2);
+Vcol=uint8(floor(interp2(x,y,Vmag,X,Y)/Vmax*size(cmap,1)));
+Vcol(Vcol==0)=1;
+for j=1:size(cmap,1)
+pos = find(Vcol==j);
+if(~isempty(pos) && pos(1)==1), pos(1)=[]; end
+if ~isempty(pos)
+tempx = [X(pos-1) X(pos) NaN(size(pos))]';
+tempy = [Y(pos-1) Y(pos) NaN(size(pos))]';
+h = [h ; line(tempx(1:end-1),tempy(1:end-1),'color',cmap(j,:),'linewidth',lw)];
+end
+end
+end
+end
+end
+
+if nargout>0
+hout=h;
 end
 
 if nargout>0
