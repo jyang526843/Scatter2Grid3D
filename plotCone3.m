@@ -8,9 +8,15 @@ figure, ps=p_sim_pw; %ps(:,1)=ps(:,1)+u3_sim(:,1); ps(:,2)=ps(:,2)+u3_sim(:,2); 
 u_mag = sqrt(u3_sim(:,1).^2 + u3_sim(:,2).^2 + u3_sim(:,3).^2); Umag_max = max(u_mag);
  %plot3(ps(:,1)+u(:,1),ps(:,2)+u(:,2),ps(:,3)+u(:,3),'k.'); hold on;
 hc = coneplot(ps(:,1),ps(:,2),ps(:,3),u3_sim(:,1),u3_sim(:,2),u3_sim(:,3),0.04,'nointerp'); 
-colormap jet; caxis([0,Umag_max]); fvc = repmat(u_mag(:)',[42 1]);
+  caxis([0,Umag_max]); fvc = repmat(u_mag(:)',[42 1]);
 set(hc, 'facecolor', 'flat', 'facevertexcdata', fvc(:));
 hc.EdgeColor = 'none'; hc.AmbientStrength = 0.6; hc.DiffuseStrength = 0.75;  
-hc.SpecularStrength = 0.4; hc.SpecularExponent = 3; h_color = colorbar;
-set(h_color, 'ylim', [0, Umag_max]); axis off; lighting phong;
+hc.SpecularStrength = 0.4; hc.SpecularExponent = 3; 
+h_color = colorbar; set(h_color, 'ylim', [0, Umag_max]); set(h_color,'fontsize',14);
+
+lighting phong;
 title('Displacement (Unit: um)')
+
+view([60,30]); set(gca,'fontsize',14);  axis on; 
+ylabel('y (um)'); xlabel('x (um)'); zlabel('z (um)');  
+ grid minor; grid on; set(gcf,'color','w');

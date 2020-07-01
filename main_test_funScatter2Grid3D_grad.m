@@ -12,6 +12,7 @@
 clear all; close all; clc;
 
 %% Interpolate scattered data to regular griddata
+% load('testData.mat');
 load('testData.mat');
 % p_meas: coordinates of scattered data
 % u_sim_pw_meas: measured displacements of scattered data
@@ -34,8 +35,8 @@ figure, quiver3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid)
 plotCone3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid); view([-60,30])
 
 % ----- Streamline plot ----
-[xGridsl,yGridsl,zGridsl] = meshgrid(xGrid(1):76:xGrid(end), yGrid(1):76:yGrid(end), [zGrid(1),0,zGrid(end)]);
-plotStreamline3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid,xGridsl,yGridsl,zGridsl)
+[yGridsl,xGridsl,zGridsl] = meshgrid(yGrid(1):76:yGrid(end), xGrid(1):76:xGrid(end), [zGrid(1),0,zGrid(end)]);
+plotStreamline3(yGrid,xGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid,yGridsl,xGridsl,zGridsl)
 
  
 
