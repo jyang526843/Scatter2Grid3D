@@ -30,7 +30,7 @@ end
 xList = min(x(:)):sxyz(1):max(x(:)+sxyz(1));
 yList = min(y(:)):sxyz(2):max(y(:)+sxyz(2));
 zList = min(z(:)):sxyz(3):max(z(:)+sxyz(3));
-[xGrid,yGrid,zGrid] = meshgrid(xList,yList,zList);
+[yGrid,xGrid,zGrid] = meshgrid(yList,xList,zList);
  
 
 % ------ Regularization ------
@@ -38,13 +38,13 @@ if smoothness==0
     f_interp = scatteredInterpolant(x,y,z,f,'linear');
     fGrid = reshape(f_interp(xGrid(:),yGrid(:),zGrid(:)), size(xGrid));
 else
-    fGrid = regularizeNd([y,x,z],f,{yList,xList,zList},smoothness);
+    fGrid = regularizeNd([x,y,z],f,{xList,yList,zList},smoothness);
 end
 
 % ------ Plot and check ------
-% figure, scatter3(xGrid(:),yGrid(:),zGrid(:),ones(length(xGrid(:)),1),fGrid(:)); cb=colorbar;
+%figure, scatter3(xGrid(:),yGrid(:),zGrid(:),ones(length(xGrid(:)),1),fGrid(:)); cb=colorbar;
 % figure, scatter3(xGrid(:),yGrid(:),zGrid(:),ones(length(xGrid(:)),1),fGrid2(:)); cb=colorbar;
-% figure, scatter3(x,y,z,ones(length(x(:)),1),f(:)); cb=colorbar;
+%figure, scatter3(x,y,z,ones(length(x(:)),1),f(:)); cb=colorbar;
 
 
 end
