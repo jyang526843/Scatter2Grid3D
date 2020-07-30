@@ -12,8 +12,8 @@ Matlab code: Generate a central finite difference operator to compute gradients
 % This is a little different from some MATLAB image processing functions. 
 
 % For example, if a 3D image has size MxNxL, in this code, we always have  
-% the image size_x=M, size_y=N, size_z=L. If you use some Matlab computer 
-% vision/image post-processing function, for example, 'imagesc3D', or  
+% the image size_x=M, size_y=N, size_z=L. If you use some Matlab computer  
+% vision/image post-processing function, for example, 'imagesc3D', or   
 % 'imagesc', or 'imshow', or 'surf', it will reads size_x=N, size_y=M, size_z=L. 
  
 % Please pay attention to this.  
