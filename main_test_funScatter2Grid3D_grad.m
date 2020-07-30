@@ -1,4 +1,19 @@
 % Test file for funScatter2Grid3D and compute gradients
+%
+% ****** ATTENTION ******
+% The "x,y,z" or "1-,2-,3-" coordinates in this exchange file correspond to 
+% the 1st, 2nd and 3rd indices of Matlab workspace variable. For example, 
+% p_meas(:,1) and p_meas(:,2) are the x- & y-coordinates of scattered points. 
+%
+% This is a little different from some MATLAB image processing functions. 
+% For example, if a 3D image has size M*N*L, in this code, we always have
+% the image size_x=M, size_y=N, size_z=L. If you use some Matlab computer
+% vision/image post-processing function, for example, 'imagesc3D', or
+% 'imagesc', or 'imshow', or 'surf', it will reads size_x=N, size_y=M, size_z=L.
+%
+% Please pay attention to this.  
+% 
+%
 % -----------------------------------------------
 % Author: Jin Yang (jyang526@wisc.edu)
 % Date: 06-24-2020
@@ -27,6 +42,7 @@ smoothness = 1e-2; % Smoothness for regularization; "smoothness=0" means no regu
 
 % ----- Scattered plot: scatter3 -----
 plotScatter3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid)
+%plotScatter3(p_meas(:,1),p_meas(:,2),p_meas(:,3),u_sim_pw_meas(:,1),u_sim_pw_meas(:,2),u_sim_pw_meas(:,3));
 
 % ----- Quiver plot: quiver3 ------
 figure, quiver3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid)
@@ -35,10 +51,10 @@ figure, quiver3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid)
 plotCone3(xGrid,yGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid); view([-60,30])
 
 % ----- Streamline plot ----
-[yGridsl,xGridsl,zGridsl] = meshgrid(yGrid(1):76:yGrid(end), xGrid(1):76:xGrid(end), [zGrid(1),0,zGrid(end)]);
-plotStreamline3(yGrid,xGrid,zGrid,u3x_meas_Grid,u3y_meas_Grid,u3z_meas_Grid,yGridsl,xGridsl,zGridsl)
+[yGridsl,xGridsl,zGridsl] = meshgrid(yGrid(1):76:yGrid(end),xGrid(1):76:xGrid(end),[zGrid(1),0,zGrid(end)]);
+plotStreamline3(yGrid,xGrid,zGrid,u3y_meas_Grid,u3x_meas_Grid,u3z_meas_Grid,yGridsl,xGridsl,zGridsl)
 
- 
+
 
 %% Compute gradients
 % ----- F_meas ------
